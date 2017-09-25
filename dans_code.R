@@ -3,13 +3,13 @@
 rm(list=ls())
 options(stringsAsFactors = FALSE)
 graphics.off()
-setwd("~/Desktop/budwork")
+setwd("~/Documents/git/twoohonebuds")
 
 library(ggplot2)
 library(dplyr)
 library(plyr)
 
-dater<-read.csv("BUDSET_Dissection_Data_April30.csv")
+dater<-read.csv("input/BUDSET_Dissection_Data_April30.csv")
 colnames(dater)
 ####cleaning
 unique(dater$species)
@@ -91,10 +91,41 @@ ggplot(daterbothsites, aes(doy))+geom_histogram(binwidth=1,aes(color=Site))
 ### does location matter for size
 ggplot(daterbothsites,aes(nickname,bud_volume,col=bud_location))+stat_summary()
 
+###look over time to see bias
+# model 1: check for day effect, excluding data measured in March. 
+# Logic: exclude the bulk of the SH measurements, now focusing on initial and repeated HF measures, and SH measures made at the repeated measure time (Late April)
 
+###note i am doing this with bud_volume instead of width as jehane did
+daternoMarch <- subset(dater, doy<60 | doy>90)
+daternoMarchHF <- subset(daternoMarch, Site=="Harvard Forest")
+
+modelnoMarch <- lm(bud_volume ~ name * doy, data=daternoMarch, na.action=na.exclude)
+summary(modelnoMarch)
+anova(modelnoMarch)
+
+specieslist <- unique(daternoMarchHF$name)
+listhere <- list()
+for (sp in seq_along(specieslist)){
+  dataonesp <- subset(daternoMarchHF, name==specieslist[sp])
+  modelnoMarch <- lm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
+  listhere[[paste(sp, specieslist[sp])]] <- list(coef(modelnoMarch), anova(modelnoMarch)) # adding species name and coefs for doy effect
+}
+listhere
+
+
+dataonespHF <- subset(daternoMarchHF, name==specieslist[1])
+modelwdoy <- lm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
+summary(modelwdoy)
+dataonesp <- subset(daterbothsites, name==specieslist[1])
+modelwSite <- lm(bud_volume~Site, data=dataonesp, na.action=na.exclude)
+summary(modelwSite)
+
+
+
+#################################part II########################## devising a response variable########################
 ## can i use Dan F's data as a response
 
-d<-read.csv("Budburst By Day.csv")
+d<-read.csv("input/Budburst By Day.csv")
 
 WL1<-dplyr::select(d,ind,lday,bday)
 colnames(daterbothsites)[which(names(daterbothsites) == "individual_ID")] <- "ind"

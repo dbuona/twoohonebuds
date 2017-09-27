@@ -8,6 +8,7 @@ setwd("~/Documents/git/twoohonebuds")
 library(ggplot2)
 library(dplyr)
 library(plyr)
+library(lme4)
 
 dater<-read.csv("input/BUDSET_Dissection_Data_April30.csv")
 colnames(dater)
@@ -127,35 +128,31 @@ summary(modelwSite)
 
 d<-read.csv("input/Budburst By Day.csv")
 
-WL1<-dplyr::select(d,ind,lday,bday)
-colnames(daterbothsites)[which(names(daterbothsites) == "individual_ID")] <- "ind"
-newdat<-right_join(WL1,daterbothsites,by="ind")
+dd<-dplyr::select(d,ind,rep,lday,bday)
+meanbb<- dplyr::group_by(dd,ind)
+meanbb<-dplyr::summarise(meanbb,meanbday=mean(bday))
+
+colnames(dater)[which(names(dater) == "individual_ID")] <- "ind"
+gooby<- dplyr::group_by(dater,ind)
+gooby<-dplyr::summarise(gooby,meanbvol=mean(bud_volume))
+
+newdat<-right_join(meanbb,gooby,by="ind")
+
+newdat<-separate(newdat,ind, c("ID", "site"), "_")
+newdat$ind<-paste(newdat$ID,newdat$site,sep="_")
+blug<-left_join(newdat,dater, by="ind")
+blug<-dplyr::select(blug, ID.x,site,meanbday,meanbvol,ind,name)
+blug<-blug[!duplicated(blug),]
+
 ####problem: pseduoreplication i think implies each bud on the indiviual burst on the same day
 ###we dont actually know which bud burst I don't think
 
-###option1: summarise mean bud size for each id
-summ<-daterbothsites %>% dplyr::group_by(ind) %>% dplyr::summarise( Meanbv = mean(bud_volume, na.rm=TRUE))
-newdat2<-right_join(WL1,summ,by="ind")
-newdat3<-newdat2 %>% dplyr::group_by(ind) %>% dplyr::summarise( Meanlday = mean(lday, na.rm=TRUE))
-newdat4<-newdat2 %>% dplyr::group_by(ind) %>% dplyr::summarise( Meanbday = mean(bday, na.rm=TRUE))
 
-newdat6<-left_join(newdat3,newdat4,by="ind")
-fin.data<-left_join(newdat6,summ,by="ind")
 ####Models
 
-mod1<-lm(Meanbday~Meanbv,data=fin.data)
+mod1<-lm(meanbday~meanbvol,data=newdat)
 summary(mod1)
-mod2<-lm(Meanlday~Meanbv,data=fin.data)
+mod2<-lmer(meanbday~meanbvol+(1+name|site),data=blug)
 summary(mod2)
-
-####I think these are pseudo replicated
-mod3<-lm(bday~bud_volume,data=newdat)
-summary(mod3)
-
-####There are worse and seem in incorperate the pseduoreplication
-mod4<-lm(lday~bud_volume,data=newdat)
-summary(mod4)
-mod5<-lm(bday~bud_volume,data=newdat)
-summary(mod5)
-
-###Todo: look at dans raw data and see if thre are more descriptive accounts of bb.
+coef(mod2)
+##

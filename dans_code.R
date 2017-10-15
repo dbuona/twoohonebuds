@@ -9,6 +9,8 @@ library(ggplot2)
 library(dplyr)
 library(plyr)
 library(lme4)
+library(rstanarm)
+library(rstan)
 
 dater<-read.csv("input/BUDSET_Dissection_Data_April30.csv")
 colnames(dater)
@@ -123,6 +125,12 @@ summary(modelwSite)
 
 
 
+#####Dan's attempt to bias correct and model "true bud volume
+#true bud volume ~  a[sp/ind] + doy[sp] + measured bud volume[sp]
+goob<-lmer(bud_volume~doy+(1+doy|name/individualID),data=dater)
+summary(goob)
+coef(goob)
+ranef(goob)
 #################################part II########################## devising a response variable########################
 ## can i use Dan F's data as a response
 

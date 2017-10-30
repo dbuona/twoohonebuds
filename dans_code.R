@@ -108,15 +108,22 @@ modelnoMarch <- lm(bud_volume ~ name * doy, data=daternoMarch, na.action=na.excl
 summary(modelnoMarch)
 anova(modelnoMarch)
 
+#completepooling
+
+modelnoMarch <- stan_lmer(bud_volume~doy+(1|name), data=daternoMarchHF, na.action=na.exclude)
+pp_check(modelnoMarch)
+
+
 specieslist <- unique(daternoMarchHF$name)
 listhere <- list()
 for (sp in seq_along(specieslist)){
   dataonesp <- subset(daternoMarchHF, name==specieslist[sp])
-  modelnoMarch <- lm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
-  listhere[[paste(sp, specieslist[sp])]] <- list(coef(modelnoMarch), anova(modelnoMarch)) # adding species name and coefs for doy effect
+  modelnoMarch <- stan_glm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
+  pp_check(modelnoMarch)
+  listhere[[paste(sp, specieslist[sp])]] <- list(coef(modelnoMarch)) # adding species name and coefs for doy effect
 }
 listhere
-
+pp_check(modelnoMarch)
 
 dataonespHF <- subset(daternoMarchHF, name==specieslist[1])
 modelwdoy <- lm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
@@ -132,8 +139,8 @@ summary(modelwSite)
 #true bud volume ~  a[sp/ind] + doy[sp] + measured bud volume[sp]
 
 ## basic true bud volume with comeplete pooling all data
-my_prior= normal(1,1000)
-truvol<-stan_lmer(bud_volume~doy+(1|name), dater,prior =my_prior)
+
+truvol<-stan_lmer(bud_volume~doy+(1|name), dater)
 print(truvol)
 pp_check(truvol)
 launch_shinystan(truvol)

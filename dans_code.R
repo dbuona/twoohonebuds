@@ -11,6 +11,8 @@ library(plyr)
 library(lme4)
 library(rstanarm)
 library(rstan)
+library(arm)
+library("rmutil")
 
 dater<-read.csv("input/BUDSET_Dissection_Data_April30.csv")
 colnames(dater)
@@ -120,6 +122,7 @@ dataonespHF <- subset(daternoMarchHF, name==specieslist[1])
 modelwdoy <- lm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
 summary(modelwdoy)
 dataonesp <- subset(daterbothsites, name==specieslist[1])
+
 modelwSite <- lm(bud_volume~Site, data=dataonesp, na.action=na.exclude)
 summary(modelwSite)
 
@@ -127,10 +130,23 @@ summary(modelwSite)
 
 #####Dan's attempt to bias correct and model "true bud volume
 #true bud volume ~  a[sp/ind] + doy[sp] + measured bud volume[sp]
-goob<-lmer(bud_volume~doy+(1+doy|name/individualID),data=dater)
-summary(goob)
-coef(goob)
-ranef(goob)
+
+## basic true bud volume with comeplete pooling all data
+my_prior= normal(1,1000)
+truvol<-stan_lmer(bud_volume~doy+(1|name), dater,prior =my_prior)
+print(truvol)
+pp_check(truvol)
+launch_shinystan(truvol)
+
+
+#bias correct
+display(truvol)
+coef(truvol)
+ranef(truvol)
+predict(truvol)
+
+
+
 #################################part II########################## devising a response variable########################
 ## can i use Dan F's data as a response
 

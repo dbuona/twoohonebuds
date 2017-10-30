@@ -1,62 +1,87 @@
 ###fake data for buds 19 Oct 2017
 
-For onspecies
-a <- 7.2
-DOY <- 2.1
-Site <- -5
-s <- 3
-y <- rnorm( length(x) , mean=a + DOY*x + Site*z , sd=s )
-
-
-
-
-
-
-######## This copys ospreee generate but Im not sure I want to do it that way
-
-# Clear workspace
-rm(list=ls()) # remove everything currently held in the R memory
-options(stringsAsFactors=FALSE)
+rm(list=ls())
+options(stringsAsFactors = FALSE)
 graphics.off()
+setwd("~/Documents/git/twoohonebuds")
 
-nsp<-10 ##number of species
-nrep<-20 ###buds/sp
-ntot<-nsp*nrep
+library(ggplot2)
+library(dplyr)
+library(plyr)
+library(lme4)
+library(rstanarm)
+library(rstan)
+library(arm)
+library(msm)
 
-intermean <- 7 # mean for budvol
-intersd <- 4 # SD for selecting species intercepts
-spint <- rnorm(nsp, intermean, intersd)
+#5 specue species fake data for tru_bud vol
+set.seed(73)
 
-###build
+
+##################################################################
+## This version has only simple linear model with no interactions:
+# bb ~ force + photo + chill
+# and only random intercepts for species!
+##################################################################
+
+# Note to self (Lizzie): could improve code, so easier to see distribution for a and sigma_y
+# I did this below #
+
+# nlab = 10 # number of labgroups
+nsp = 5 # number of species
+
+ntot = 50 # numbers of obs per species.
+
+
+#  with species  (note to self: This is not the best, better to draw from a distribution)
+baseinter <- 5 # baseline intercept (days to BB) across all species
+spint <- baseinter + c(1:nsp)-mean(1:nsp) # different intercepts by species
+
+# now start building ...
 testdat <- vector()
+
 
 for(i in 1:nsp){ # loop over species. i = 1
   
-  # binomail predictors for each observation
-  DOY = rbinom(ntot, 2, .3)
-  site = rbinom(ntot, 1, .5)
+  # continuous predictors, generate level (if you will) for each observation
+  doy<- rtnorm(ntot,40,10,lower=10,upper=70) 
   
-  # set up effect sizes
-  DOYcoef = 2  
-  sitecoef = 1 
- 
-  # SD for each treatment
-  DOYcoef.sd = 0.2
-  sitecoef.sd = 0.2 
-
+  ## set up effect size
+  doycoef<-0.5
+  doycoef.sd<-0.05
+  
   # build model matrix 
-  mm <- model.matrix(~DOY+site, data.frame(DOY, site))
+  mm <- model.matrix(~doy, data.frame(doy))
   
   # coefficients need to match the order of the colums in the model matrix (mm)
+  # so here, that's intercept, chill, force, photo
   coeff <- c(spint[i], 
-             rnorm(1, DOYcoef, DOYcoef.sd),
-             rnorm(1, sitecoef, sitecoef.sd)
-  )
+             rnorm(1, doycoef, doycoef.sd))
+
   
   bvol <- rnorm(n = ntot, mean = mm %*% coeff, sd = 0.1)
   
   testdatx <- data.frame(bvol, sp = i, 
-                         DOY, site)
+                         doy)
   
-  testdat <- rbind(testdat, testdatx)
+  testdat <- rbind(testdat, testdatx)  
 }
+
+
+truvol<-stan_lmer(bvol~doy+(1|sp), testdat)
+print(truvol)
+pp_check(truvol)
+ranef(truvol)
+
+
+###make adjusted bvol
+testdat<-dplyr::mutate(testdat, offset=40-doy)
+testdat<-dplyr::mutate(testdat, deltabv= offset*0.5)
+testdat<-dplyr::mutate(testdat, trubudvol= bvol-deltabv)
+
+### fill in new column
+
+
+  
+
+

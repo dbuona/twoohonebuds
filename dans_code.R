@@ -106,11 +106,13 @@ daternoMarchHF <- subset(daternoMarch, Site=="Harvard Forest")
 
 modelnoMarch <- lm(bud_volume ~ name * doy, data=daternoMarch, na.action=na.exclude)
 summary(modelnoMarch)
+coef(modelnoMarch)
 anova(modelnoMarch)
 
 #completepooling
 
-modelnoMarch <- stan_lmer(bud_volume~doy+(1|name), data=daternoMarchHF, na.action=na.exclude)
+modelnoMarch <- brm(bud_volume~(doy|name), data=daternoMarchHF)
+summary(modelnoMarch)
 pp_check(modelnoMarch)
 
 

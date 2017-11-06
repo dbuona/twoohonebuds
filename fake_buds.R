@@ -69,7 +69,7 @@ summary(truvol)
 
 
 ###This doesnt seem to work for my hierarchical model, only when tru vol is lm)
-b<-coef(truvol)
+b<-ranef(truvol)
 c<-40
 vol<-testdat$bvol
 
@@ -85,44 +85,51 @@ testdat<-dplyr::mutate(testdat, trubudvol= bvol-deltabv)
 ######################################################################start here
 #### fake data for doy effect varying slope
 nsp = 5 # number of species
-ntot = 50 # numbers of obs per species.
+ntot = 100 # numbers of obs per species.
 baseinter <- 5 # baseline intercept (budvol) across all species
 spint <- baseinter + c(1:nsp)-mean(1:nsp) # different intercepts by species
-baseeff<-.5 ##baseline effect size
-speff<- baseeff + c(1:nsp)-mean(1:nsp) ##diferent effect by sdpecies
+baseeff<-2 ##baseline effect size
+speff<- baseeff + c(1:nsp)-rnorm(1:nsp,2,.25) ##diferent effect by species
 # now start building ...
 testdat2 <- vector()
 for(i in 1:nsp){ # loop over species. i = 1
   # continuous predictors, generate level for each observation
-  doy<- rtnorm(ntot,40,10,lower=10,upper=70) 
+  doy<- rtnorm(ntot,30,10,lower=20,upper=90) 
   ## set up effect size
   doycoef<-speff
-  doycoef.sd<-0.05
+  doycoef.sd<-2
   # build model matrix 
   mm <- model.matrix(~doy, data.frame(doy))
   # coefficients need to match the order of the colums in the model matrix (mm)
   coeff <- c(spint[i], 
              rnorm(1, doycoef[i], doycoef.sd))
   
-  bvol <- rnorm(n = ntot, mean = mm %*% coeff, sd = 0.1)
+  bvol <- rtnorm(n = ntot, mean = mm %*% coeff, sd = 6,lower=1, upper=11)
   
   testdatx <- data.frame(bvol, sp = i, 
                          doy)
   testdat2 <- rbind(testdat2, testdatx)  
 }
 
+ggplot(testdat2,aes(bvol))+geom_density()+facet_wrap(~sp)
+
 ###model (try this in lmer cause it takes for ever)
 
 truvol.slope<-lmer(bvol~doy+(doy|sp), testdat2)
 ###This seems to work
+summary(truvol.slope)
+fixef(truvol.slope)
+pred<-predict(truvol.slope)
+plot(pred,testdat2$bvol)
+plot(truvol.slope)
+plot(testdat2$bvol)
 
-
-###this part is stuck...need to figure out how to do this with hierarchical
-coef(truvol.slope)[1]
+### Below adjusts
+slopes<-coef(truvol.slope)
+B<-slopes$sp$doy
 c<-40
 vol<-testdat2$bvol
-
 for(i in 1:nsp){
-  testdat2$tru<-testdat2$bvol-(testdat2$bvol-40)*coef(truvol.slope)[i]
+  testdat2$tru<-testdat2$bvol-(testdat2$bvol-40)*B[i]
 }
 

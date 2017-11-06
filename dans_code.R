@@ -111,7 +111,7 @@ anova(modelnoMarch)
 
 #completepooling
 
-modelnoMarch <- brm(bud_volume~(doy|name), data=daternoMarchHF)
+modelnoMarch <- stan_lmer(bud_volume~doy+(1+doy|name), data=daternoMarchHF)
 summary(modelnoMarch)
 pp_check(modelnoMarch)
 
@@ -125,6 +125,7 @@ for (sp in seq_along(specieslist)){
   listhere[[paste(sp, specieslist[sp])]] <- list(coef(modelnoMarch)) # adding species name and coefs for doy effect
 }
 listhere
+coef(modelnoMarch)
 pp_check(modelnoMarch)
 
 dataonespHF <- subset(daternoMarchHF, name==specieslist[1])
@@ -142,7 +143,8 @@ summary(modelwSite)
 
 ## basic true bud volume with comeplete pooling all data
 
-truvol<-stan_lmer(bud_volume~doy+(1|name), dater)
+truvol<-lmer(bud_volume~doy+(1+doy|name), daternoMarchHF)
+
 print(truvol)
 pp_check(truvol)
 launch_shinystan(truvol)

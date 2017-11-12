@@ -87,9 +87,9 @@ testdat<-dplyr::mutate(testdat, trubudvol= bvol-deltabv)
 nsp = 5 # number of species
 ntot = 100 # numbers of obs per species.
 baseinter <- 5 # baseline intercept (budvol) across all species
-spint <- baseinter + c(1:nsp)-mean(1:nsp) # different intercepts by species
+spint <- c(6,4,3,8,5.5) # different intercepts by species
 baseeff<-2 ##baseline effect size
-speff<- baseeff + c(1:nsp)-rnorm(1:nsp,2,.25) ##diferent effect by species
+speff<- c(.5,-.1,.8,.3,.6) ##diferent effect by species
 # now start building ...
 testdat2 <- vector()
 for(i in 1:nsp){ # loop over species. i = 1
@@ -97,7 +97,7 @@ for(i in 1:nsp){ # loop over species. i = 1
   doy<- rtnorm(ntot,30,10,lower=20,upper=90) 
   ## set up effect size
   doycoef<-speff
-  doycoef.sd<-2
+  doycoef.sd<-.5
   # build model matrix 
   mm <- model.matrix(~doy, data.frame(doy))
   # coefficients need to match the order of the colums in the model matrix (mm)
@@ -124,7 +124,7 @@ plot(pred,testdat2$bvol)
 plot(truvol.slope)
 plot(testdat2$bvol)
 
-### Below adjusts
+### Below adjusts to "true" bud vol at day
 slopes<-coef(truvol.slope)
 B<-slopes$sp$doy
 c<-40

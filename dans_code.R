@@ -109,24 +109,16 @@ summary(modelnoMarch)
 coef(modelnoMarch)
 anova(modelnoMarch)
 
-#completepooling
-
-modelnoMarch <- stan_lmer(bud_volume~doy+(1+doy|name), data=daternoMarchHF)
-summary(modelnoMarch)
-pp_check(modelnoMarch)
-
 
 specieslist <- unique(daternoMarchHF$name)
 listhere <- list()
-for (sp in seq_along(specieslist)){
+#for (sp in seq_along(specieslist)){
   dataonesp <- subset(daternoMarchHF, name==specieslist[sp])
   modelnoMarch <- stan_glm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
   pp_check(modelnoMarch)
   listhere[[paste(sp, specieslist[sp])]] <- list(coef(modelnoMarch)) # adding species name and coefs for doy effect
 }
 listhere
-coef(modelnoMarch)
-pp_check(modelnoMarch)
 
 dataonespHF <- subset(daternoMarchHF, name==specieslist[1])
 modelwdoy <- lm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
@@ -142,8 +134,13 @@ summary(modelwSite)
 #true bud volume ~  a[sp/ind] + doy[sp] + measured bud volume[sp]
 
 ## basic true bud volume with comeplete pooling all data
+ggplot(daternoMarch,aes(bud_volume))+geom_density()
+ggplot(daternoMarch,aes(bud_volume))+geom_density()+facet_wrap(~nickname)
+###try centering
+daternoMarch$log_bvol<-log(daternoMarch$bud_volume)
+ggplot(daternoMarch,aes(log_bvol))+geom_density()
 
-truvol<-lmer(bud_volume~doy+(1+doy|name), daternoMarchHF)
+truvol<-stan_lmer(log_bvol~doy+(doy|name), daternoMarch)
 
 print(truvol)
 pp_check(truvol)

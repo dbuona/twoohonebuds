@@ -133,7 +133,7 @@ B<-slopes$sp$doy
 c<-40
 vol<-testdat2$bvol
 for(i in 1:nsp){
-  testdat2$tru<-testdat2$bvol-(testdat2$bvol-40)*B[i]
+  testdat2$tru<-testdat2$bvol-(testdat2$doyl-40)*B[i]
 }
 pp_check(truvol.slope)
 ## THis code is good. launch_shinystan(truvol.slope)

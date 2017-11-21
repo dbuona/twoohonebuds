@@ -1,0 +1,258 @@
+Output for fake model
+stan_lmer
+ family:  gaussian [identity]
+ formula: bvol_cent ~ doy + (doy | sp)
+------
+
+Estimates:
+            Median MAD_SD
+(Intercept) 0.7    0.1   
+doy         0.0    0.0   
+sigma       0.3    0.0   
+
+Error terms:
+ Groups   Name        Std.Dev. Corr 
+ sp       (Intercept) 0.0942        
+          doy         0.0071   -0.41
+ Residual             0.3161        
+Num. levels: sp 20 
+
+Sample avg. posterior predictive 
+distribution of y (X = xbar):
+         Median MAD_SD
+mean_PPD 1.0    0.0   
+
+------
+For info on the priors used see help('prior_summary.stanreg').
+> fixef(truvol.slope)
+(Intercept)         doy 
+0.667326370 0.007406679
+
+REAL DATA: no pooling
+> listhere
+$`1 Acer_pensylvanicum`
+$`1 Acer_pensylvanicum`[[1]]
+(Intercept)         doy 
+ 9.25424804  0.07329207 
+
+
+$`2 Acer_rubrum`
+$`2 Acer_rubrum`[[1]]
+(Intercept)         doy 
+ 0.13850448  0.06889798 
+
+
+$`3 Acer_saccharum`
+$`3 Acer_saccharum`[[1]]
+(Intercept)         doy 
+ 1.51767255 -0.00905361 
+
+
+$`4 Alnus_incana`
+$`4 Alnus_incana`[[1]]
+(Intercept)         doy 
+14.20208365 -0.01485747 
+
+
+$`5 Aronia_melanocarpa`
+$`5 Aronia_melanocarpa`[[1]]
+(Intercept)         doy 
+  27.648941   -0.705783 
+
+
+$`6 Betula_alleghaniensis`
+$`6 Betula_alleghaniensis`[[1]]
+(Intercept)         doy 
+ 8.10887091 -0.03084268 
+
+
+$`7 Betula_lenta`
+$`7 Betula_lenta`[[1]]
+(Intercept)         doy 
+10.03995477 -0.03671732 
+
+
+$`8 Betula_papyrifera`
+$`8 Betula_papyrifera`[[1]]
+(Intercept)         doy 
+ 6.84871135  0.06474535 
+
+
+$`9 Corylus_cornuta`
+$`9 Corylus_cornuta`[[1]]
+(Intercept)         doy 
+ -2.3352058   0.1978886 
+
+
+$`10 Fagus_grandifolia`
+$`10 Fagus_grandifolia`[[1]]
+(Intercept)         doy 
+ 9.34811149  0.02895625 
+
+
+$`11 Fraxinus_nigra`
+$`11 Fraxinus_nigra`[[1]]
+(Intercept)         doy 
+  8.5011640   0.0260557 
+
+
+$`12 Hamamelis_virginiana`
+$`12 Hamamelis_virginiana`[[1]]
+(Intercept)         doy 
+  8.4257755  -0.1055725 
+
+
+$`13 Ilex_mucronata`
+$`13 Ilex_mucronata`[[1]]
+(Intercept)         doy 
+0.475981856 0.009845383 
+
+
+$`14 Lonicera_canadensis`
+$`14 Lonicera_canadensis`[[1]]
+(Intercept)         doy 
+ -6.1152440   0.1604172 
+
+
+$`15 Lyonia_ligustrina`
+$`15 Lyonia_ligustrina`[[1]]
+(Intercept)         doy 
+ 2.16569327 -0.00599433 
+
+
+$`16 Nyssa_sylvatica`
+$`16 Nyssa_sylvatica`[[1]]
+(Intercept)         doy 
+ 0.19940479  0.07489674 
+
+
+$`17 Populus_grandidentata`
+$`17 Populus_grandidentata`[[1]]
+(Intercept)         doy 
+ 26.2733205  -0.1235155 
+
+
+$`18 Prunus_pensylvanica`
+$`18 Prunus_pensylvanica`[[1]]
+(Intercept)         doy 
+0.783986402 0.008169223 
+
+
+$`19 Quercus_alba`
+$`19 Quercus_alba`[[1]]
+(Intercept)         doy 
+ 3.16636741 -0.04115796 
+
+
+$`20 Quercus_rubra`
+$`20 Quercus_rubra`[[1]]
+(Intercept)         doy 
+2.737675003 0.008694636 
+
+
+$`21 Quercus_velutina`
+$`21 Quercus_velutina`[[1]]
+(Intercept)         doy 
+ 4.53777678 -0.01180794 
+
+
+$`22 Rhamnus_frangula`
+$`22 Rhamnus_frangula`[[1]]
+(Intercept)         doy 
+ -53.882818    1.159306 
+
+
+$`23 Rhododendron_prinophyllum`
+$`23 Rhododendron_prinophyllum`[[1]]
+(Intercept)         doy 
+ -7.6811663   0.2439071 
+
+
+$`24 Spiraea_alba`
+$`24 Spiraea_alba`[[1]]
+  (Intercept)           doy 
+ 0.5729348177 -0.0007136873 
+
+
+$`25 Vaccinium_myrtilloides`
+$`25 Vaccinium_myrtilloides`[[1]]
+ (Intercept)          doy 
+0.2070502808 0.0006397816 
+
+
+$`26 Viburnum_cassinoides`
+$`26 Viburnum_cassinoides`[[1]]
+(Intercept)         doy 
+ 1.56330978  0.02907668 
+
+
+$`27 Viburnum_lantanoides`
+$`27 Viburnum_lantanoides`[[1]]
+(Intercept)         doy 
+   96.33585     0.50376 
+  
+  
+Partially pooled
+                          (Intercept)           doy
+Acer_pensylvanicum         0.97360087  0.0134061030
+Acer_rubrum               -0.88702900  0.0178676240
+Acer_saccharum            -0.33306664 -0.0086808402
+Alnus_incana               1.90855109  0.0033097797
+Aronia_melanocarpa        -1.14420979 -0.0014265687
+Betula_alleghaniensis      1.71356160  0.0028592689
+Betula_lenta               1.97273873 -0.0021187949
+Betula_papyrifera          1.75065790  0.0056832225
+Corylus_cornuta            0.15559524  0.0106329226
+Fagus_grandifolia         -0.16602881  0.0180341318
+Fraxinus_nigra             0.92293754  0.0001122005
+Hamamelis_virginiana       0.37627815 -0.0009993553
+Ilex_mucronata            -0.86319366  0.0078165000
+Lonicera_canadensis       -1.49269336  0.0225539517
+Lyonia_ligustrina          0.08036407  0.0056998873
+Nyssa_sylvatica            0.27585091  0.0070780583
+Populus_grandidentata      2.76905318 -0.0094749658
+Prunus_pensylvanica       -0.83284307  0.0097434765
+Quercus_alba               0.43899518 -0.0165675002
+Quercus_rubra              0.22537762  0.0048804883
+Quercus_velutina           0.76399513  0.0003160250
+Rhamnus_frangula          -0.12302127  0.0046863334
+Rhododendron_prinophyllum -1.17380721  0.0064118813
+Spiraea_alba              -0.68732824 -0.0040623331
+Vaccinium_myrtilloides    -2.39204931  0.0059766050
+Viburnum_cassinoides      -0.41396937  0.0065563260
+Viburnum_lantanoides       4.20573134 -0.0011521875
+
+attr(,"class")
+[1] "coef.mer"
+> ranef(doy)
+> ranef(truvol)
+$name
+                          (Intercept)           doy
+Acer_pensylvanicum         0.67845883  0.0093020728
+Acer_rubrum               -1.18217104  0.0137635938
+Acer_saccharum            -0.62820868 -0.0127848705
+Alnus_incana               1.61340906 -0.0007942505
+Aronia_melanocarpa        -1.43935182 -0.0055305989
+Betula_alleghaniensis      1.41841956 -0.0012447613
+Betula_lenta               1.67759669 -0.0062228251
+Betula_papyrifera          1.45551586  0.0015791923
+Corylus_cornuta           -0.13954680  0.0065288923
+Fagus_grandifolia         -0.46117084  0.0139301016
+Fraxinus_nigra             0.62779550 -0.0039918298
+Hamamelis_virginiana       0.08113611 -0.0051033856
+Ilex_mucronata            -1.15833569  0.0037124698
+Lonicera_canadensis       -1.78783540  0.0184499214
+Lyonia_ligustrina         -0.21477797  0.0015958570
+Nyssa_sylvatica           -0.01929112  0.0029740281
+Populus_grandidentata      2.47391114 -0.0135789961
+Prunus_pensylvanica       -1.12798511  0.0056394462
+Quercus_alba               0.14385314 -0.0206715305
+Quercus_rubra             -0.06976442  0.0007764581
+Quercus_velutina           0.46885309 -0.0037880053
+Rhamnus_frangula          -0.41816331  0.0005823032
+Rhododendron_prinophyllum -1.46894924  0.0023078511
+Spiraea_alba              -0.98247028 -0.0081663633
+Vaccinium_myrtilloides    -2.68719135  0.0018725748
+Viburnum_cassinoides      -0.70911141  0.0024522957
+Viburnum_lantanoides       3.91058930 -0.0052562177
+   

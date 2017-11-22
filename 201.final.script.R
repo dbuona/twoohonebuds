@@ -188,36 +188,27 @@ listhere
 ggplot(daternoMarch,aes(bud_volume))+geom_density()
 ggplot(daternoMarch,aes(bud_volume))+geom_density()+facet_wrap(~nickname) ##not so normal
 
+
 ###log transform:
 daternoMarch$log_bvol<-log(daternoMarch$bud_volume)
 ggplot(daternoMarch,aes(log_bvol))+geom_density() ##now its normal
 
-###run no pooling again with transformation
-listhere <- list()
-for (sp in seq_along(specieslist)){
-  dataonesp <- subset(daternoMarch, name==specieslist[sp])
-  modelnoMarch <- stan_glm(log_bvol~doy, data=dataonesp, na.action=na.exclude)
-  pp_check(modelnoMarch)
-  listhere[[paste(sp, specieslist[sp])]] <- as.data.frame(coef(modelnoMarch)) # adding species name and coefs for doy effect
-}
-View(listhere)
 
 ### partial pooling
 truvol<-stan_lmer(log_bvol~doy+(doy|name), daternoMarch,cores=4)
 truvol
 coef(truvol)
+posterior_interval(truvol)
 ranef(truvol)
 
 pp_check(truvol)
 
-###now real value
+launch_shinystan(truvol)### nor really working...try it at weld hill
 
-
-
-#### correct to day 40
+### correct to day 40
 slopes<-coef(truvol)
 B<-slopes$name$doy
-
+B1<-exp(B)
 c<-40
 
 N<-as.data.frame(specieslist)
@@ -234,9 +225,38 @@ Z<-dplyr::select(dater,nickname,bud_volume,tru)
 Q<-gather(Z,change,volume,2:3)
 
 ggplot(Q,aes(nickname,volume))+geom_jitter(height=0,width=2,aes(color=change))
-##To do: compare to partial pooling
 
 
-listhere<-as.data.frame(listhere)
+####Part III: Phenology
+d<-read.csv("input/Budburst By Day.csv")
+dd<-dplyr::select(d,ind,sp,rep,lday,bday)
+meanbb<- dplyr::group_by(dd,ind)
+meanbb<-dplyr::summarise(meanbb,meanbday=mean(bday,na.rm=TRUE))
 
-Beta<-as.vector(listhere[2,])
+###average budvol
+colnames(dater)[which(names(dater) == "individual_ID")] <- "ind"
+gooby<- dplyr::group_by(dater,ind)
+gooby1<-dplyr::summarise(gooby,meanbvol=mean(tru))
+gooby2<-dplyr::summarise(gooby,meanstemdiam=mean(stem_diameter,na.rm=TRUE))
+###new dataset
+newdat<-right_join(meanbb,gooby1,by="ind")
+newdat<-right_join(newdat,gooby2,by="ind")
+###clean species
+newdat<-transform(newdat, SP = substr(ind, 1, 6), ID = substr(ind, 7, 11))
+
+###View data
+ggplot(newdat,aes(meanbvol))+geom_density()
+ggplot(newdat,aes(meanbday))+geom_density() ### poison ish
+ggplot(newdat,aes(meanstemdiam))+geom_density() ###none are normal
+
+###try a model
+moodle<-stan_glmer(meanbday ~ meanstemdiam + meanbvol + (meanstemdiam+meanbvol|SP),
+         data = newdat, family = gaussian, 
+         prior = normal(0,2.5), prior_intercept = normal(0,5),
+          cores = 4)
+moodle
+pp_check(moodle)
+coef(moodle)
+posterior_interval(moodle)
+
+

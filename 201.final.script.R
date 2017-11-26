@@ -6,6 +6,7 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 graphics.off()
 setwd("~/Documents/git/twoohonebuds")
+load (file = ".RData")
 
 library(ggplot2)
 library(dplyr)
@@ -139,11 +140,12 @@ ggplot(testdat2,aes(bvol_cent))+geom_density()
 
 
 ###model for fake data
-truvol.slope<-stan_lmer(bvol_cent~doy+(doy|sp), testdat2)
+truvol.slope<-stan_lmer(bvol~doy+(doy|sp), testdat2)
 
 
 truvol.slope
-fixef(truvol.slope) ##intercepts are way too low
+fixef(truvol.slope)
+posterior_interval(truvol.slope)
 ranef(truvol.slope)
 
 ##posterior predictive check
@@ -155,7 +157,9 @@ ncol(yrep)
 yrep<-gather(yrep,ob,pred,1:2000)
 yrep$orig<-testdat2$bvol
 
-ggplot(yrep,aes(orig,pred))+geom_point() ###okayish
+ggplot(yrep,aes(orig,pred))+geom_point()+geom_abline(mapping = NULL, data = NULL, slope=1, intercept=0,color="red"
+                                                     na.rm = FALSE, show.legend = NA)+geom_smooth(method = "lm", se=TRUE, color="blue", formula = y ~ x)
+###okayish
 
 
 ### Below adjusts to "true" bud vol at day if everything was measured at day 40
@@ -203,19 +207,22 @@ ranef(truvol)
 
 pp_check(truvol)
 
+
 launch_shinystan(truvol)### nor really working...try it at weld hill
 
 ### correct to day 40
 slopes<-coef(truvol)
 B<-slopes$name$doy
-B1<-exp(B)
+
 c<-40
 
+#change everything
 N<-as.data.frame(specieslist)
 N<-nrow(N)
 for(i in 1:N){
   dater$tru<-dater$bud_volume-((dater$doy-c)*B[i])
 }
+
 
 
 ###

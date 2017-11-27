@@ -11,6 +11,7 @@ load (file = ".RData")
 library(ggplot2)
 library(dplyr)
 library("tidyr")
+library(tidyverse)
 library(plyr)
 library(lme4)
 library(rstanarm)
@@ -177,60 +178,39 @@ for(i in 1:nsp){
 # Logic: exclude the bulk of the SH measurements, now focusing on initial and repeated HF measures, and SH measures made at the repeated measure time (Late April)
 daternoMarch <- subset(dater, doy<60 | doy>90)
 
-###no pooling
-specieslist <- unique(daternoMarch$name)
-listhere <- list()
-for (sp in seq_along(specieslist)){
-dataonesp <- subset(daternoMarch, name==specieslist[sp])
-modelnoMarch <- stan_glm(bud_volume~doy, data=dataonesp, na.action=na.exclude)
-pp_check(modelnoMarch)
-listhere[[paste(sp, specieslist[sp])]] <- list(coef(modelnoMarch)) # adding species name and coefs for doy effect
-}
-listhere
-
 ###look at distribution
 ggplot(daternoMarch,aes(bud_volume))+geom_density()
 ggplot(daternoMarch,aes(bud_volume))+geom_density()+facet_wrap(~nickname) ##not so normal
-
 
 ###log transform:
 daternoMarch$log_bvol<-log(daternoMarch$bud_volume)
 ggplot(daternoMarch,aes(log_bvol))+geom_density() ##now its normal
 
-
 ### partial pooling
 truvol<-stan_lmer(log_bvol~doy+(doy|name), daternoMarch,cores=4)
+##check it out
 truvol
 coef(truvol)
 posterior_interval(truvol)
 ranef(truvol)
-
 pp_check(truvol)
-
-
-launch_shinystan(truvol)### nor really working...try it at weld hill
+#launch_shinystan(truvol)
 
 ### correct to day 40
 slopes<-coef(truvol)
 B<-slopes$name$doy
-
 c<-40
 
-#change everything
+#loop to apply beta for a true estimate
 N<-as.data.frame(specieslist)
 N<-nrow(N)
 for(i in 1:N){
   dater$tru<-dater$bud_volume-((dater$doy-c)*B[i])
 }
 
-
-
-###
-
 #Plot
 Z<-dplyr::select(dater,nickname,bud_volume,tru)
 Q<-gather(Z,change,volume,2:3)
-
 ggplot(Q,aes(nickname,volume))+geom_jitter(height=0,width=2,aes(color=change))
 
 

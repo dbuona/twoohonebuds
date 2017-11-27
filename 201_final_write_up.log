@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  26 NOV 2017 14:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  26 NOV 2017 21:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -381,176 +381,66 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-! Missing $ inserted.
-<inserted text> 
-                $
-l.77             Median MAD_
-                            SD
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 77.
+(Font)              <7> on input line 66.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 77.
+(Font)              <5> on input line 66.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.81 
-     
+l.67  & Actual & Median& MAD_
+                             SD & CI5 & CI95\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.85 formula: log_
-                  bvol ~ doy + (doy | name)
+l.67  & Actual & Median& MAD_SD &
+                                  CI5 & CI95\\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.81 & Median& MAD_
+                   SD & CI5 & CI95\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.87 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.89             Median MAD_
-                            SD
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.93 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.94 #
-      #make this into a table
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! You can't use `macro parameter character #' in vertical mode.
-l.94 ##
-       make this into a table
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.125 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-Overfull \hbox (13.01503pt too wide) in paragraph at lines 94--125
-\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 877692160\OML/cmm/m/it/10 :\
-OT1/cmr/m/n/10 0178379549\OML/cmm/m/it/10 Acer[]accharum \OMS/cmsy/m/n/10 ^^@ \
-OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 33066940 \OMS/cmsy/m/n/10 ^^@
- \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0085356410\OML/cmm/m/it/10 
-Alnus[]ncana\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 918133970\OML/cm
-m/m/it/10 :\OT1/cmr/m/n/10 0033483077\OML/cmm/m/it/10 Aronia[]elanocarpa \OMS/c
-msy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (388.88974pt too wide) in paragraph at lines 94--125
-\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 12912393 \OMS/cmsy/m/n/10 ^^
-@ \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0021545908\OML/cmm/m/it/10
- Betula[]lleghaniensis\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 738796
-630\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0023795954\OML/cmm/m/it/10 Betula[]enta\OT
-1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 98438474 \OMS/cmsy/m/n/10 ^^@ \
-OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0021823538\OML/cmm/m/it/10 Be
-tula[]apyrifera\OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 752827490\OML
-/cmm/m/it/10 :\OT1/cmr/m/n/10 0057429543\OML/cmm/m/it/10 Corylus[]ornuta\OT1/cm
-r/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 166749310\OML/cmm/m/it/10 :\OT1/cmr
-/m/n/10 0105563237\OML/cmm/m/it/10 Fagus[]randifolia \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (24.77007pt too wide) in paragraph at lines 94--125
-\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 146534140\OML/cmm/m/it/10 :\
-OT1/cmr/m/n/10 0179099137\OML/cmm/m/it/10 Fraxinus[]igra\OT1/cmr/m/n/10 0\OML/c
-mm/m/it/10 :\OT1/cmr/m/n/10 926815740\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 00015890
-12\OML/cmm/m/it/10 Hamamelis[]irginiana\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/
-cmr/m/n/10 37882207 \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT
-1/cmr/m/n/10 0008616836\OML/cmm/m/it/10 Ilex[]ucronata \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (278.82744pt too wide) in paragraph at lines 94--125
-\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 860217530\OML/cmm/m/it/10 :\
-OT1/cmr/m/n/10 0078131211\OML/cmm/m/it/10 Lonicera[]anadensis \OMS/cmsy/m/n/10 
-^^@ \OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 479474500\OML/cmm/m/it/1
-0 :\OT1/cmr/m/n/10 0227057059\OML/cmm/m/it/10 Lyonia[]igustrina\OT1/cmr/m/n/10 
-0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 089676010\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0
-058018335\OML/cmm/m/it/10 Nyssa[]ylvatica\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT
-1/cmr/m/n/10 299612980\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0067295703\OML/cmm/m/it
-/10 Populus[]randidentata\OT1/cmr/m/n/10 2\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 790
-94437 \OMS/cmsy/m/n/10 ^^@
- []
-
-
-Overfull \hbox (330.7229pt too wide) in paragraph at lines 94--125
-\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0095892349\OML/cmm/m/it/10 P
-runus[]ensylvanica \OMS/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1
-/cmr/m/n/10 827932480\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0098234703\OML/cmm/m/it/
-10 Quercus[]lba\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 45222579 \OMS
-/cmsy/m/n/10 ^^@ \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0164645539\
-OML/cmm/m/it/10 Quercus[]ubra\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10
- 226985850\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0048372103\OML/cmm/m/it/10 Quercus[
-]elutina\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 774761460\OML/cmm/m/
-it/10 :\OT1/cmr/m/n/10 0002200500\OML/cmm/m/it/10 Rhamnus[]rangula \OMS/cmsy/m/
-n/10 ^^@
- []
-
-
-Overfull \hbox (87.5161pt too wide) in paragraph at lines 94--125
-\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 108238000\OML/cmm/m/it/10 :\
-OT1/cmr/m/n/10 0045472003\OML/cmm/m/it/10 Rhododendron[]rinophyllum \OMS/cmsy/m
-/n/10 ^^@ \OT1/cmr/m/n/10 1\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 127362180\OML/cmm/
-m/it/10 :\OT1/cmr/m/n/10 0060342932\OML/cmm/m/it/10 Spiraea[]lba \OMS/cmsy/m/n/
-10 ^^@ \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 67236604 \OMS/cmsy/m/
-n/10 ^^@ \OT1/cmr/m/n/10 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0041050694\OML/cmm/
-m/it/10 Vaccinium[]yrtilloides \OMS/cmsy/m/n/10 ^^@
- []
+l.81 & Median& MAD_SD &
+                        CI5 & CI95\\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
 <temp_bias_fig.pdf, id=1, 794.97pt x 614.295pt>
 File: temp_bias_fig.pdf Graphic file (type pdf)
  <use temp_bias_fig.pdf>
-Package pdftex.def Info: temp_bias_fig.pdf used on input line 130.
+Package pdftex.def Info: temp_bias_fig.pdf used on input line 93.
 (pdftex.def)             Requested size: 426.80284pt x 426.79787pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 130--131
+Underfull \hbox (badness 10000) in paragraph at lines 93--94
 
  []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 <fake_data_pp_check_final.pdf, id=2, 794.97pt x 614.295pt>
 File: fake_data_pp_check_final.pdf Graphic file (type pdf)
 
 <use fake_data_pp_check_final.pdf>
-Package pdftex.def Info: fake_data_pp_check_final.pdf used on input line 135.
+Package pdftex.def Info: fake_data_pp_check_final.pdf used on input line 98.
 (pdftex.def)             Requested size: 426.80284pt x 426.79787pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
 
  []
 
@@ -561,10 +451,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: fake_predvsorig_final.pdf Graphic file (type pdf)
 
 <use fake_predvsorig_final.pdf>
-Package pdftex.def Info: fake_predvsorig_final.pdf used on input line 140.
+Package pdftex.def Info: fake_predvsorig_final.pdf used on input line 103.
 (pdftex.def)             Requested size: 426.80284pt x 426.79787pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
+Underfull \hbox (badness 10000) in paragraph at lines 103--104
 
  []
 
@@ -575,10 +465,51 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: pp_check_log_real.pdf Graphic file (type pdf)
 
 <use pp_check_log_real.pdf>
-Package pdftex.def Info: pp_check_log_real.pdf used on input line 145.
+Package pdftex.def Info: pp_check_log_real.pdf used on input line 108.
 (pdftex.def)             Requested size: 426.80536pt x 426.79295pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 145--146
+Underfull \hbox (badness 10000) in paragraph at lines 108--109
+
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<tru_vs_measured_partial.pdf, id=5, 505.89pt x 505.89pt>
+File: tru_vs_measured_partial.pdf Graphic file (type pdf)
+
+<use tru_vs_measured_partial.pdf>
+Package pdftex.def Info: tru_vs_measured_partial.pdf used on input line 113.
+(pdftex.def)             Requested size: 426.7973pt x 426.7973pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 113--114
+
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<shinstan_multiparam.pdf, id=6, 469.755pt x 342.27875pt>
+File: shinstan_multiparam.pdf Graphic file (type pdf)
+
+<use shinstan_multiparam.pdf>
+Package pdftex.def Info: shinstan_multiparam.pdf used on input line 118.
+(pdftex.def)             Requested size: 426.78961pt x 426.8237pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 118--119
+
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<moodle_ppcheck.pdf, id=7, 794.97pt x 614.295pt>
+File: moodle_ppcheck.pdf Graphic file (type pdf)
+ <use moodle_ppcheck.pdf>
+Package pdftex.def Info: moodle_ppcheck.pdf used on input line 123.
+(pdftex.def)             Requested size: 426.80284pt x 426.79787pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 123--124
 
  []
 
@@ -587,27 +518,29 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-[2 <./temp_bias_fig.pdf>] [3 <./fake_data_pp_check_final.pdf>] [4 <./fake_predv
-sorig_final.pdf>] [5 <./pp_check_log_real.pdf>] (./201_final_write_up.aux) ) 
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./temp_
+bias_fig.pdf>] [2 <./fake_data_pp_check_final.pdf>] [3 <./fake_predvsorig_final
+.pdf>] [4 <./pp_check_log_real.pdf>] [5 <./tru_vs_measured_partial.pdf>]
+[6 <./shinstan_multiparam.pdf>] [7 <./moodle_ppcheck.pdf>]
+(./201_final_write_up.aux) ) 
 Here is how much of TeX's memory you used:
- 3391 strings out of 493014
- 49257 string characters out of 6133351
- 114561 words of memory out of 5000000
- 6866 multiletter control sequences out of 15000+600000
- 15838 words of font info for 32 fonts, out of 8000000 for 9000
+ 3399 strings out of 493014
+ 49588 string characters out of 6133351
+ 113561 words of memory out of 5000000
+ 6876 multiletter control sequences out of 15000+600000
+ 11195 words of font info for 25 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,29p,310b,231s stack positions out of 5000i,500n,10000p,200000b,80000s
-</u
-sr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr
-/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/l
-ocal/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
-al/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 201_final_write_up.pdf (5 pages, 585098 bytes).
+ 38i,7n,29p,310b,231s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb>
+Output written on 201_final_write_up.pdf (7 pages, 2037457 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 265 PDF objects out of 1000 (max. 8388607)
+ 198 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

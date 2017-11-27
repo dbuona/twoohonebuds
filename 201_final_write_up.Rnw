@@ -10,71 +10,32 @@
 \makeatother
 \begin{document}
 
-\section*{Introduction}
-Bias correction needed (see figure 1)
-\section*{Methods}
-formula for bias correction
 
-\section*{Results and Findings}
-Fake data actual values: intercept 8,slope=.1
-mean over all species: mean spint, mean speff
-It is good! see?\\
-formula: bvol ~ doy + (doy | sp)
-------
 
-Estimates:
-            Median MAD_SD
-(Intercept) 8.3    1.4   
-doy         0.1    0.0   
-sigma       4.1    0.1 
-                                             5%         95%
-(Intercept)                        5.9913970956 10.67437286
-doy                                0.0336621419  0.15960975
-
+\begin{tabular}{c|c|c|c|c|c}
+ & Actual & Median& MAD_SD & CI5 & CI95\\
+\hline
+Intercept & 8 & 8.3 & 1.4 & 5.99 & 10.67\\
+\hline
+doy & 0.1 &0.1 & 0.0 & 0.0337 & 0.159\\
+\hline
+sigma & 4 & 4.1 & 0.1 &  & \\
+\hline
+\end{tabular}
 
 \subsection{Modeling temporal bias and correction}
-formula: log_bvol ~ doy + (doy | name)
-------
-
-Estimates:
-            Median MAD_SD
-(Intercept) 0.3    0.3   
-doy         0.0    0.0   
-sigma       1.4    0.0
-
-##make this into a table
-> coef(truvol)
-$name
-                          (Intercept)           doy
-Acer_pensylvanicum         0.97458062  0.0135474656
-Acer_rubrum               -0.87769216  0.0178379549
-Acer_saccharum            -0.33066940 -0.0085356410
-Alnus_incana               1.91813397  0.0033483077
-Aronia_melanocarpa        -1.12912393 -0.0021545908
-Betula_alleghaniensis      1.73879663  0.0023795954
-Betula_lenta               1.98438474 -0.0021823538
-Betula_papyrifera          1.75282749  0.0057429543
-Corylus_cornuta            0.16674931  0.0105563237
-Fagus_grandifolia         -0.14653414  0.0179099137
-Fraxinus_nigra             0.92681574  0.0001589012
-Hamamelis_virginiana       0.37882207 -0.0008616836
-Ilex_mucronata            -0.86021753  0.0078131211
-Lonicera_canadensis       -1.47947450  0.0227057059
-Lyonia_ligustrina          0.08967601  0.0058018335
-Nyssa_sylvatica            0.29961298  0.0067295703
-Populus_grandidentata      2.79094437 -0.0095892349
-Prunus_pensylvanica       -0.82793248  0.0098234703
-Quercus_alba               0.45222579 -0.0164645539
-Quercus_rubra              0.22698585  0.0048372103
-Quercus_velutina           0.77476146  0.0002200500
-Rhamnus_frangula          -0.10823800  0.0045472003
-Rhododendron_prinophyllum -1.12736218  0.0060342932
-Spiraea_alba              -0.67236604 -0.0041050694
-Vaccinium_myrtilloides    -2.38204936  0.0059859085
-Viburnum_cassinoides      -0.40934429  0.0064627936
-Viburnum_lantanoides       4.21958712 -0.0011653093
 
 
+\begin{tabular}{c|c|c|c|c}
+& Median& MAD_SD & CI5 & CI95\\
+\hline
+Intercept& 0.3 & 0.3 & -1.8e-01 & 0.82\\
+\hline
+doy &0.0 & 0.0 & -1.03e-03  &0.008 \\
+\hline
+sigma & 1.4.1 & 0.0 &1.4042e+00 & 1.45046 \\
+\hline
+\end{tabular}
 
 
 \begin{figure}[h!]
@@ -102,7 +63,15 @@ Viburnum_lantanoides       4.21958712 -0.0011653093
 \caption{Temporal bias correction. Blue dots demonstrate the corrected values against the original (red). The plot has been horizontally jittered for better viewing}
 \end{figure}
 
+\begin{figure}[h!]
+\includegraphics[width=15cm, height=15cm]{shinstan_multiparam.pdf}\\
+\caption{The mean effect sizes estimates and 50 and 95 credible intervals of day of measurement on each of the 27 study species from the model bvol ~ doy + (doy | sp)}
+\end{figure}
 
+\begin{figure}[h!]
+\includegraphics[width=15cm, height=15cm]{moodle_ppcheck.pdf}\\
+\caption{Posterior predictive check for exploratory model meanbday ~ meanstemdiam + meanbvol + (meanstemdiam + meanbvol | SP)}
+\end{figure}
 
 
 

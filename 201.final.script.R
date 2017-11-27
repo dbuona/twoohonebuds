@@ -6,7 +6,7 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 graphics.off()
 setwd("~/Documents/git/twoohonebuds")
-load (file = ".RData")
+#load (file = ".RData")
 
 library(ggplot2)
 library(dplyr)
@@ -20,7 +20,7 @@ library("arm")
 library("rmutil")
 library("MCMCglmm")
 
-dater<-read.csv("input/BUDSET_Dissection_Data_April30.csv")
+dater<-read.csv("input/BUDSET_Dissection_Data_April30.csv") ###read in bud data
 
 ###PART IA: Data cleaning######
 colnames(dater)
@@ -30,7 +30,7 @@ unique(dater$Genus)
 ##### spaces in genus;fix
 dater$Genus <- sub("^ | $", "", dater$Genus) 
 
-####make name
+####make $name-- Genus_species
 dater$name<-paste(dater$Genus,dater$species,sep="_")
 unique(dater$name)
 ###returns Populus grandifolia (not a species) Fix
@@ -47,7 +47,7 @@ unique(dater$Site)
 dater$Site[dater$Site=="St. Hippolyte"] <- "Saint Hippolyte"
 unique(dater$Site)
 
-###clean location: 
+###clean location on twig: 
 dater$bud_location <- sub("^ | $", "", dater$bud_location) 
 unique(dater$bud_location)
 dater$bud_location[dater$bud_location=="Terminal_twig"] <- "Terminal"
@@ -245,5 +245,6 @@ moodle
 pp_check(moodle)
 coef(moodle)
 posterior_interval(moodle)
+citation("rstanarm")
 
 
